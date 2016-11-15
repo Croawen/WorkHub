@@ -62,7 +62,6 @@ namespace WorkHub.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
