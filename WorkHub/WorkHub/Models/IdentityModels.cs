@@ -14,15 +14,13 @@ namespace WorkHub.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public DateTime DateOfBirth { get; set; }
+        public int ReputationPoints { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public DateTime DateOfBirth { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public int ReputationPoints { get; set; }
-        public List<WorkOrder> WorkOrders { get; set; }
+        public virtual ICollection<WorkOrder> WorkOrders { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -44,5 +42,7 @@ namespace WorkHub.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WorkHub.Models.WorkOrder> WorkOrders { get; set; }
     }
 }
