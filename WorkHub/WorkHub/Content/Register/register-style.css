@@ -1,0 +1,58 @@
+﻿body {
+     background-color: #1d1f21;
+}
+
+.reg-form {
+}
+
+.form-control {
+    float: right;
+    margin-left: 10px;
+}
+
+.form-label {
+    text-align: left;
+}
+
+.form-group {
+    display: block;
+    margin: auto;
+    padding-bottom: 10px;
+}
+.form-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top:-70px; /* this is half the height of your div*/  
+    margin-left:-120px; /*this is half of width of your div*/
+}
+
+input[type=text] {
+    color : transparent;
+      outline: none;
+      background-color: #1d1f21;
+      border: none;
+      border-bottom: 2px solid Aquamarine;
+      width: 200px;
+      font-size: 20px;
+}
+
+input[type=password] {
+      outline: none;
+      background-color: #1d1f21;
+      border: none;
+      border-bottom: 2px solid Aquamarine;
+      width: 200px;
+      font-size: 20px;
+}
+
+input[type=text]:focus {
+    border-bottom: 2px solid white;
+    transition-duration: 0.8s;
+}
+
+
+input[type=password]:focus {
+    border-bottom: 2px solid white;
+    transition-duration: 0.8s;
+}
