@@ -83,6 +83,12 @@ namespace WorkHub.Models
         public string LastName { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }

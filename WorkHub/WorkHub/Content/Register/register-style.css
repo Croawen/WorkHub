@@ -1,5 +1,5 @@
 ﻿body {
-     background-color: #1d1f21;
+     background-color: white;
 }
 
 .reg-form {
@@ -30,7 +30,7 @@
 input[type=text] {
     color : transparent;
       outline: none;
-      background-color: #1d1f21;
+      background-color: white;
       border: none;
       border-bottom: 2px solid Aquamarine;
       width: 200px;
@@ -39,7 +39,7 @@ input[type=text] {
 
 input[type=password] {
       outline: none;
-      background-color: #1d1f21;
+      background-color: white;
       border: none;
       border-bottom: 2px solid Aquamarine;
       width: 200px;

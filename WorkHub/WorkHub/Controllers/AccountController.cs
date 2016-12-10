@@ -158,10 +158,11 @@ namespace WorkHub.Controllers
                     Email = model.Email,
                     Address = model.Address,
                     City = model.City,
-                    DateOfBirth = model.DateOfBirth,
+                    DateOfBirth = model.DateOfBirth.Date,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    ReputationPoints = 0
+                    ReputationPoints = 0,
+                    PhoneNumber = model.PhoneNumber
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
