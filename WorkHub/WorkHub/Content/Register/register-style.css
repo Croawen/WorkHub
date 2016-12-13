@@ -1,5 +1,6 @@
 ﻿body {
      background-color: white;
+     font-family: "Lato", sans-serif;
 }
 
 .reg-form {
@@ -7,30 +8,43 @@
 
 .form-control {
     float: right;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
+h3 {
+    margin-left: 10px;
+}
 .form-label {
-    text-align: left;
+    font-size: 20px;
 }
 
 .form-group {
     display: block;
     margin: auto;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 .form-box {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top:-70px; /* this is half the height of your div*/  
+    left: 45%;
     margin-left:-120px; /*this is half of width of your div*/
+    box-shadow: 0px 1px 2px #000000;
+    margin-bottom: 10px;
+}
+
+input[type=submit] {
+    width: 120px;
+    height: 30px;
+    background-color: green;
+    border: none;
+    color: white;
+    font-family: "Lato", sans-serif;
+    font-size: 15px;
+    transition-duration: 0.4s;
+    border-radius: 2px;
 }
 
 input[type=text] {
-    color : transparent;
       outline: none;
-      background-color: white;
       border: none;
       border-bottom: 2px solid Aquamarine;
       width: 200px;
@@ -39,7 +53,6 @@ input[type=text] {
 
 input[type=password] {
       outline: none;
-      background-color: white;
       border: none;
       border-bottom: 2px solid Aquamarine;
       width: 200px;
@@ -47,12 +60,50 @@ input[type=password] {
 }
 
 input[type=text]:focus {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid lightgreen;
+    transition-duration: 0.8s;
+}
+
+input[type=submit]:hover {
+    background-color: lightgreen;
     transition-duration: 0.8s;
 }
 
 
 input[type=password]:focus {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid lightgreen;
     transition-duration: 0.8s;
 }
+
+/* The alert message box */
+.alert {
+    width:300px;
+    display: inline-block;
+    padding: 20px;
+    background-color: green; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    box-shadow: 0px 1px 4px #000000;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+li {
+    padding-bottom: 4px;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}
+@import url('https://fonts.googleapis.com/css?family=Lato');

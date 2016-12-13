@@ -6,11 +6,16 @@
 
 @Styles.Render("~/Content/Register/css")
 
+<br />
 <div class="form-box">
+    <center><h1>Sign up</h1></center>
+    
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "reg-form", role = "form" }))
     {
+       
+        <h3>Basic info</h3>
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary("", new { @class = "text-danger" })
+       
         <div class="form-group">
             @Html.LabelFor(m => m.Email, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -23,6 +28,7 @@
             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
+        <h3>Your profile</h3>
         <div class="form-group">
             @Html.LabelFor(m => m.FirstName, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
@@ -48,10 +54,21 @@
             @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            <input type="submit" class="form-button" value="Register" />
+            <center><input type="submit" class="form-button" value="Register" /></center>
         </div>
     }
 </div>
+
+@{
+    if (!Html.ViewData.ModelState.IsValid)
+    {
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        </div>
+    }
+
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval");
