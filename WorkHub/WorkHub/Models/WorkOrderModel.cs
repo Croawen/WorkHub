@@ -13,10 +13,13 @@ namespace WorkHub.Models
         public int Id { get; set; }
 
         public string UserRefId { get; set; }
-
         [ForeignKey("UserRefId")]
         public ApplicationUser User { get; set; }
         
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+
         public bool IsActive { get; set; }
 
         public bool IsCompleted { get; set; }
