@@ -21,7 +21,7 @@
     margin-bottom: 0;
 }
 .nav-pills ul {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .nav-pills>li>a {
     background-color: #23527c;
@@ -4223,7 +4223,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-collapse {
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 90px;
+  text-align: center;
   overflow-x: visible;
   -webkit-overflow-scrolling: touch;
   border-top: 1px solid transparent;
@@ -5040,6 +5041,52 @@ a.badge:focus {
     font-size: 63px;
   }
 }
+
+.gora {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 5px;
+  color: inherit;
+  background-color: #eee;
+}
+.gora h1,
+.gora .h1 {
+  color: inherit;
+}
+.gora p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+.gora > hr {
+  border-top-color: #d5d5d5;
+}
+.container .gora,
+.container-fluid .gora {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 6px;
+}
+.gora .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 128px) {
+  .gora {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .container .gora,
+  .container-fluid .gora {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .gora h1,
+  .gora .h1 {
+    font-size: 63px;
+  }
+}
+
+
 .thumbnail {
   display: block;
   padding: 4px;
