@@ -44,5 +44,6 @@ namespace WorkHub.Models
         }
 
         public System.Data.Entity.DbSet<WorkHub.Models.WorkOrder> WorkOrders { get; set; }
+        public System.Data.Entity.DbSet<WorkHub.Models.Category> Categories { get; set; }
     }
 }

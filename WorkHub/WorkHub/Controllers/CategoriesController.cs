@@ -13,44 +13,44 @@ using WorkHub.Models;
 
 namespace WorkHub.Controllers
 {
-    public class WorkOrdersController : ApiController
+    public class CategoriesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/WorkOrders
-        public IQueryable<WorkOrder> GetWorkOrders()
+        // GET: api/Categories
+        public IQueryable<Category> GetCategories()
         {
-            return db.WorkOrders;
+            return db.Categories;
         }
 
-        // GET: api/WorkOrders/5
-        [ResponseType(typeof(WorkOrder))]
-        public async Task<IHttpActionResult> GetWorkOrder(int id)
+        // GET: api/Categories/5
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> GetCategory(int id)
         {
-            WorkOrder workOrder = await db.WorkOrders.FindAsync(id);
-            if (workOrder == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return Ok(workOrder);
+            return Ok(category);
         }
 
-        // PUT: api/WorkOrders/5
+        // PUT: api/Categories/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutWorkOrder(int id, WorkOrder workOrder)
+        public async Task<IHttpActionResult> PutCategory(int id, Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != workOrder.Id)
+            if (id != category.CategoryId)
             {
                 return BadRequest();
             }
 
-            db.Entry(workOrder).State = EntityState.Modified;
+            db.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WorkHub.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WorkOrderExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace WorkHub.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/WorkOrders
-        [ResponseType(typeof(WorkOrder))]
-        public async Task<IHttpActionResult> PostWorkOrder(WorkOrder workOrder)
+        // POST: api/Categories
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> PostCategory(Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.WorkOrders.Add(workOrder);
+            db.Categories.Add(category);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = workOrder.Id }, workOrder);
+            return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
         }
 
-        // DELETE: api/WorkOrders/5
-        [ResponseType(typeof(WorkOrder))]
-        public async Task<IHttpActionResult> DeleteWorkOrder(int id)
+        // DELETE: api/Categories/5
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> DeleteCategory(int id)
         {
-            WorkOrder workOrder = await db.WorkOrders.FindAsync(id);
-            if (workOrder == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            db.WorkOrders.Remove(workOrder);
+            db.Categories.Remove(category);
             await db.SaveChangesAsync();
 
-            return Ok(workOrder);
+            return Ok(category);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace WorkHub.Controllers
             base.Dispose(disposing);
         }
 
-        private bool WorkOrderExists(int id)
+        private bool CategoryExists(int id)
         {
-            return db.WorkOrders.Count(e => e.Id == id) > 0;
+            return db.Categories.Count(e => e.CategoryId == id) > 0;
         }
     }
 }
