@@ -6,6 +6,11 @@
 .reg-form {
 }
 
+a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+}
 .form-control {
     float: right;
     margin-left: 5px;

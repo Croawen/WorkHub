@@ -1,9 +1,14 @@
-﻿<!DOCTYPE html>
+﻿
+@{ 
+    String Username = User.Identity.Name;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Aplikacja ASP.NET</title>
+    <title>WorkHub - Find easy part-time jobs online.</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -39,98 +44,57 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Haruj PL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("WorkHub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Find a job", "Index", "WorkOrders")</li>
+                        <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome, <b>@Username</b>!</a></li>
+                            <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
+                        }      
                     </ul>
                 </div>
             </div>
         </nav>
-
         <div class="jumbotron">
-            <div class="row">
-                <header class="text-center">
-                    <img src="http://placehold.it/900x100">
-                </header>
-                <div class="col-lg-4">
-                    <ul class="nav nav-pills nav-stacked" id="left-nav">
-                        <li><a href="#"> PROGRAMMING</a></li>
-                        <li><a href="#"> PRIVATE LESSONS</a></li>
-                        <li><a href="#"> CLEANING</a></li>
-                        <li><a href="#"> BABYSITTING</a></li>
-                        <li><a href="#"> XXX</a></li>
-                        <li><a href="#"> Option 5</a></li>
-                        <li><a href="#"> Option 4</a></li>
-                        <li><a href="#"> Option 5</a></li>
-                        <li><a href="#"> Option 5</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-8">
-                    <figure id="swf_container">
-                        <img src="http://placehold.it/500x280">
-                    </figure>
-                </div>
-            </div>
+            @RenderBody() 
         </div><!-- ends jumbotron-->
 
         <!-- Content -->
         <div class="row">
             <div class="col-lg-4">
                 <p class="intro">
-                    <span>We don't just clean different things we clean things differently! </span>
+                    <span>We don't just clean different things we clean things differently!</span>
                     We make sure to always clean carpets with absolute care to meet your cleaning standard and reach our level of perfection. Green Homes is one of Americas top carpet cleaning company which has full carpet care solutions.
                 </p>
                 <p><a class="btn btn-primary" href="#" role="button">View details »</a></p>
             </div>
             <div class="col-lg-8">
-                <ul class="list-inline">
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                </ul>
-                <ul class="list-inline">
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                        <img class="img-responsive" src="http://placehold.it/150x75" alt="150x75">
-                    </li>
-                    <li>
-                </ul>
+                <div class="">
+                    <div class="col-lg-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#"> Programming</a></li>
+                            <li><a href="#"> Private lessons</a></li>
+                            <li><a href="#"> Cleaning</a></li>
+                            <li><a href="#"> Babysitting</a></li>
+                            <li><a href="#"> Garden</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </div><!-- ends row -->
     </div> <!-- /container -->
 
     <div class="container body-content">
-        @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Workhub</p>
         </footer>
     </div>
 

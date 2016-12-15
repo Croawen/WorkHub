@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WorkHub.Models;
+using System.Web.Security;
 
 namespace WorkHub.Controllers
 {
@@ -324,8 +325,16 @@ namespace WorkHub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Request.Cookies.Remove("UserId");
+            FormsAuthentication.SignOut();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            return LogOff();
         }
 
         protected override void Dispose(bool disposing)
