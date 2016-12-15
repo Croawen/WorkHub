@@ -4,19 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>LoggedIndex</h2>
+<h2>Explore jobs near you.</h2>
+
+<script async defer type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoDnASCk5XqED-0ii5mnpRvhCo_7YFtWo&callback=initMap"></script>  
 
 <script>
-      function initMap() {
-        // Create a map object and specify the DOM element for display.
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(initMap);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    
+    function initMap(position) {
+        var userPosition = { lat: position.coords.latitude, lng: position.coords.longitude };
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          scrollwheel: false,
-          zoom: 8
+          zoom: 15,
+          center: userPosition
         });
-      }
+        var marker = new google.maps.Marker({
+          position: userPosition,
+          map: map
+        });
+    }
 
+    getLocation();
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoDnASCk5XqED-0ii5mnpRvhCo_7YFtWo&callback=initMap"
-        async defer></script>
+
+<div id="map" style="width: 640px; height: 480px;"></div> 
+
 
