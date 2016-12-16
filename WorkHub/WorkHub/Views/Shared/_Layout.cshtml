@@ -44,11 +44,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("WorkHub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("WorkHub", "LoggedIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Find a job", "Index", "WorkOrders")</li>
+                        <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                         <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

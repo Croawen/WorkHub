@@ -18,13 +18,7 @@ namespace WorkHub.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "test";
-
-            return View();
-        }
-
+        [Authorize]
         public ActionResult LoggedIndex()
         {
             return View();

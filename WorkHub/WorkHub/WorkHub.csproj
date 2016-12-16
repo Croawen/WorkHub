@@ -307,6 +307,10 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\LoggedIndex.cshtml" />
+    <Content Include="Views\WorkOrders\Create.cshtml" />
+    <Content Include="Views\WorkOrders\Delete.cshtml" />
+    <Content Include="Views\WorkOrders\Edit.cshtml" />
+    <Content Include="Views\WorkOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
