@@ -9,111 +9,59 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkHub - Find easy part-time jobs online.</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    @Styles.Render("~/Content/Materialize/css")
+    @Scripts.Render("~/bundles/materialize")
+    
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $(".dropdown-button").dropdown(); // Load dropdown categories menu script
+        });
+           
+    </script>
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
-
-    <div class="container" id="master">
-        <nav class="navbar navbar-green">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("WorkHub", "LoggedIndex", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
+    
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Programming</a></li>
+        <li><a href="#!">Private lessons</a></li>
+        <li><a href="#!">Cleaning</a></li>
+        <li><a href="#!">Babysitting</a></li>
+        <li><a href="#!">Garden</a></li>
+    </ul>
+    <!-- End-->
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper">
+                @Html.ActionLink("WorkHub", "LoggedIndex", "Home", new { @class = "brand-logo center" })
+                    <ul>
                         <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                         <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
+                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="right hide-on-med-and-down">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome, <b>@Username</b>!</a></li>
+                            <li><a href="#"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
                             <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
                         }      
                     </ul>
-                </div>
             </div>
         </nav>
-        <div class="gora">
-            <div class="collapse navbar-collapse">
-                <div class="row">
-                    <ul class="nav nav-pills navbar-collapse">
-                        <li><a href="#"> Programming</a></li>
-                        <li><a href="#"> Private lessons</a></li>
-                        <li><a href="#"> Cleaning</a></li>
-                        <li><a href="#"> Babysitting</a></li>
-                        <li><a href="#"> Garden</a></li>
-                    </ul>
-                </div><!-- ends row -->
 
-            </div>
-        </div>
         <div class="jumbotron">
-        
             @RenderBody() 
         </div><!-- ends jumbotron-->
 
-        <!-- Content -->
-        <div class="row">
-            @*<div class="col-lg-4">
-                <p class="intro">
-                    <span>We don't just clean different things we clean things differently!</span>
-                    We make sure to always clean carpets with absolute care to meet your cleaning standard and reach our level of perfection. Green Homes is one of Americas top carpet cleaning company which has full carpet care solutions.
-                </p>
-                <p><a class="btn btn-primary" href="#" role="button">View details »</a></p>
-            </div>
-            <div class="col-lg-8">
-                <div class="">
-                    <div class="col-lg-4">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#"> Programming</a></li>
-                            <li><a href="#"> Private lessons</a></li>
-                            <li><a href="#"> Cleaning</a></li>
-                            <li><a href="#"> Babysitting</a></li>
-                            <li><a href="#"> Garden</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>*@
-        </div><!-- ends row -->
     </div> <!-- /container -->
 
-    <div class="container body-content">
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Workhub</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                &copy; @DateTime.Now.Year - Workhub
+            </div>
+       </div>
+</footer>
 </body>
 </html>

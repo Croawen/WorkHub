@@ -23,6 +23,14 @@ namespace WorkHub
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            /* Materialize Framework JS */
+            bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
+                     "~/Scripts/Materialize/materialize.js",
+                     "~/Scripts/Materialize/materialize.min.js",
+                     "~/Scripts/jquery-{version}.js",
+                      "~/Scripts/jquery.validate*"
+                     ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -32,6 +40,11 @@ namespace WorkHub
 
             bundles.Add(new StyleBundle("~/Content/Register/css").Include(
               "~/Content/Register/register-style.css"));
+
+            /* Materialize Framework Stylesheets */
+            bundles.Add(new StyleBundle("~/Content/Materialize/css").Include(
+             "~/Content/Materialize/materialize.css",
+             "~/Content/Materialize/materialize.min.css"));
         }
     }
 }
