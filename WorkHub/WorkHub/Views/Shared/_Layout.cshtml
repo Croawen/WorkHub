@@ -14,14 +14,12 @@
     
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".dropdown-button").dropdown(); // Load dropdown categories menu script
-        });
-           
+        });          
     </script>
 </head>
 <body>
-    
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="#!">Programming</a></li>
@@ -35,33 +33,30 @@
         <nav>
             <div class="nav-wrapper">
                 @Html.ActionLink("WorkHub", "LoggedIndex", "Home", new { @class = "brand-logo center" })
-                    <ul>
-                        <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
-                        <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
-                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
-                    </ul>
-                    <ul class="right hide-on-med-and-down">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li><a href="#"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
-                            <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
-                        }      
-                    </ul>
+                <ul>
+                    <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
+                    <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
+                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="#"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
+                        <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
+                    }
+                </ul>
             </div>
         </nav>
-
-        <div class="jumbotron">
-            @RenderBody() 
-        </div><!-- ends jumbotron-->
-
-    </div> <!-- /container -->
-
-    <footer class="page-footer">
-        <div class="footer-copyright">
-            <div class="container">
-                &copy; @DateTime.Now.Year - Workhub
+        <div>
+            @RenderBody() <!-- Render body from views-->
+        </div>
+        <footer class="page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    &copy; @DateTime.Now.Year - Workhub
+                </div>
             </div>
-       </div>
-</footer>
+        </footer>
+    </div> <!-- /container -->
 </body>
 </html>
