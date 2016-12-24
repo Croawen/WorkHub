@@ -1,5 +1,5 @@
 ﻿body {
-     background-color: white;
+     background-color: #e9ebee;
      font-family: "Lato", sans-serif;
 }
 
@@ -29,6 +29,7 @@ h3 {
     padding: 10px;
 }
 .form-box {
+    background-color: white;
     position: absolute;
     left: 45%;
     margin-left:-120px; /*this is half of width of your div*/
