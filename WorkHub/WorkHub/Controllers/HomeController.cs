@@ -21,7 +21,8 @@ namespace WorkHub.Controllers
         [Authorize]
         public ActionResult LoggedIndex()
         {
-            return View();
+            var workOrderList = db.WorkOrders.ToList();
+            return View(workOrderList);
         }
 
         public ActionResult Contact()

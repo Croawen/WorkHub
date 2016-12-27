@@ -50,15 +50,14 @@ namespace WorkHub.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,UserRefId,CategoryId,IsActive,IsCompleted,AddDate,Payment,Location,Description,City,Address,PhoneNumber")] WorkOrder workOrder)
+        public async Task<ActionResult> Create(WorkOrder workOrder)
         {
             workOrder.AddDate = DateTime.Now;
             workOrder.IsActive = true;
             workOrder.IsCompleted = false;
             workOrder.UserRefId = User.Identity.GetUserId();
 
-            // TODO: location settings
-            workOrder.Location = new GeoLocation { Latitude = 0, Longitude = 0 };
+       
 
             if (ModelState.IsValid)
             {

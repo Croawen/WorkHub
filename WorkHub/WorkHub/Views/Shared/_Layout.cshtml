@@ -1,5 +1,4 @@
-﻿
-@{ 
+﻿@{ 
     String Username = User.Identity.Name;
 }
 
@@ -32,7 +31,7 @@
     <div class="container">
         <nav>
             <div class="nav-wrapper">
-                @Html.ActionLink("WorkHub", "LoggedIndex", "Home", new { @class = "brand-logo center" })
+                <a class="brand-logo center" href="~/Home/LoggedIndex">WorkHub</a>
                 <ul>
                     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>

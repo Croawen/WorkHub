@@ -13,7 +13,6 @@ namespace WorkHub.Models
     public class NearbyWorkOrdersViewModel
     {
         public List<WorkOrder> WorkOrders;
-        public GeoLocation GeoLocation;
         public int Range;
     }
 }

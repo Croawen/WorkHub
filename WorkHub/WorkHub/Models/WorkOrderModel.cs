@@ -28,7 +28,8 @@ namespace WorkHub.Models
 
         public double Payment { get; set; }
 
-        public GeoLocation Location { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         public string City { get; set; }
 
