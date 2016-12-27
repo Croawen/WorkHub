@@ -1,0 +1,166 @@
+﻿@model WorkHub.Models.WorkOrder
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card white darken-1">
+            <div class="card-content text-darken-1">
+                <span class="card-title">Job</span>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">Take this job</a>
+                <a href="#">Find others</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6">
+        <div class="card white darken-1">
+            <div class="card-content text-darken-1">
+                <span class="card-title">Additional Information</span>
+                <p>
+                    <ul class="collection">
+                        <li class="collection-item"><i class="material-icons secondary-content">contact_phone</i> Phone number: @Model.PhoneNumber</li>
+                        <li class="collection-item"><i class="material-icons secondary-content">label_outline</i>Category: @Model.Category.Type</li>
+                        <li class="collection-item">Completed: @if (Model.IsCompleted == true)
+                        { 
+                            <i class="material-icons secondary-content">thumb_up</i>
+                            <text>Yes</text>
+                        }
+                        else
+                        {
+                            <i class="material-icons secondary-content">thumb_down</i>
+                            <text>No</text>
+                        }
+                        </li>
+                        <li class="collection-item">Available: @if (Model.IsActive == true)
+                        {
+                            <i class="material-icons secondary-content">done</i>
+                            <text>Yes</text>
+                        }
+                        else
+                        {
+                            <i class="material-icons secondary-content">not_interested</i>
+                            <text>No</text>
+                        }</li>
+                        <li class="collection-item"><i class="material-icons secondary-content">payment</i>Payment: @Model.Payment $</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div>
+    <h4>WorkOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCompleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCompleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+-->

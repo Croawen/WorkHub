@@ -24,18 +24,24 @@ namespace WorkHub.Controllers
         }
 
         // GET: WorkOrders/Details/5
-        public async Task<ActionResult> Details(int? id)
+        //[Route("Workorders/Details/{id}")]
+        public async Task<ActionResult> Details(int id)
         {
-            if (id == null)
+            try
+            {
+                var workOrders = db.WorkOrders.Include(w => w.Category).Include(w => w.User);
+                WorkOrder workOrder = await workOrders.FirstOrDefaultAsync(x => x.Id == id);
+                if (workOrder == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(workOrder);
+            }
+            catch(Exception)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WorkOrder workOrder = await db.WorkOrders.FindAsync(id);
-            if (workOrder == null)
-            {
-                return HttpNotFound();
-            }
-            return View(workOrder);
+              
         }
 
         // GET: WorkOrders/Create

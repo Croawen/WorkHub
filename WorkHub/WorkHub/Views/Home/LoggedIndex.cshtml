@@ -26,7 +26,7 @@
         <text>
         var markerlatLng = new google.maps.LatLng(@(item.Latitude), @(item.Longitude));
         var description = '@(item.Description)';
-        var contentString = '<b>Description:</b> <p>' + description + '</p><br/><a class="waves-effect waves-light btn" href="~/WorkOders/@item.Id">Details</a>';
+        var contentString = '<b>Description:</b> <p>' + description + '</p><br/><a class="waves-effect waves-light btn" href="~/WorkOrders/Details/@item.Id">Details</a>';
         var myinfowindow = new google.maps.InfoWindow({
             content: contentString,
             position: markerlatLng
@@ -58,8 +58,8 @@
         <div id="map" style="width: 640px; height: 480px;"></div>
     </div>
     <div class="card-action">
-        <a href="#">Take job</a>
-        <a href="#">Other Action</a>
+        <a href="#">All jobs</a>
+        <a href="#">Post a job</a>
     </div>
 </div>
 
