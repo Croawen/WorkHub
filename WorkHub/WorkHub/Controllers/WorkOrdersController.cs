@@ -17,6 +17,7 @@ namespace WorkHub.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WorkOrders
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             ViewBag.Categories = db.Categories.ToList();
@@ -25,7 +26,7 @@ namespace WorkHub.Controllers
         }
 
         // GET: WorkOrders/Details/5
-        //[Route("Workorders/Details/{id}")]
+        [Authorize]
         public async Task<ActionResult> Details(int id)
         {
             ViewBag.Categories = db.Categories.ToList();
@@ -47,6 +48,7 @@ namespace WorkHub.Controllers
         }
 
         // GET: WorkOrders/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Categories = db.Categories.ToList();
