@@ -26,7 +26,8 @@
         <text>
         var markerlatLng = new google.maps.LatLng(@(item.Latitude), @(item.Longitude));
         var description = '@(item.Description)';
-        var contentString = '<b>Description:</b> <p>' + description + '</p><br/><a class="waves-effect waves-light btn" href="~/WorkOrders/Details/@item.Id">Details</a>';
+        var reward = '@(item.Payment.ToString())';
+        var contentString = '<b>Description:</b> <p>' + description + '</p><p><b>Reward:</b> ' + reward + ' $</p><br/><a class="waves-effect waves-light btn" href="~/WorkOrders/Details/@item.Id">Details</a>';
         var myinfowindow = new google.maps.InfoWindow({
             content: contentString,
             position: markerlatLng
@@ -38,9 +39,9 @@
             infowindow: myinfowindow
         });
         marker.addListener('click', function() {
-           
+
             this.infowindow.open(map);
-       
+
         });
         </text>
         }
@@ -55,11 +56,11 @@
 <div class="card white darken-1">
     <div class="card-content dark-text">
         <span class="card-title">Explore jobs near you.</span>
-        <div id="map" style="width: 640px; height: 480px;"></div>
+        <div id="map" style="width: 100%; height: 480px;"></div>
     </div>
     <div class="card-action">
-        <a href="#">All jobs</a>
-        <a href="#">Post a job</a>
+        @Html.ActionLink("All jobs", "Index", "WorkOrders")
+        @Html.ActionLink("Post a Job", "Create", "WorkOrders")
     </div>
 </div>
 

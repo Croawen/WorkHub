@@ -21,15 +21,9 @@ namespace WorkHub.Controllers
         [Authorize]
         public ActionResult LoggedIndex()
         {
+            ViewBag.Categories = db.Categories.ToList();
             var workOrderList = db.WorkOrders.ToList();
             return View(workOrderList);
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

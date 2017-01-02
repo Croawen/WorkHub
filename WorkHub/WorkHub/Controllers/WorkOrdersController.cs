@@ -19,6 +19,7 @@ namespace WorkHub.Controllers
         // GET: WorkOrders
         public async Task<ActionResult> Index()
         {
+            ViewBag.Categories = db.Categories.ToList();
             var workOrders = db.WorkOrders.Include(w => w.Category).Include(w => w.User);
             return View(await workOrders.ToListAsync());
         }
@@ -27,6 +28,7 @@ namespace WorkHub.Controllers
         //[Route("Workorders/Details/{id}")]
         public async Task<ActionResult> Details(int id)
         {
+            ViewBag.Categories = db.Categories.ToList();
             try
             {
                 var workOrders = db.WorkOrders.Include(w => w.Category).Include(w => w.User);
@@ -47,6 +49,7 @@ namespace WorkHub.Controllers
         // GET: WorkOrders/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = db.Categories.ToList();
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Type");
             return View();
         }
@@ -58,6 +61,7 @@ namespace WorkHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(WorkOrder workOrder)
         {
+            ViewBag.Categories = db.Categories.ToList();
             workOrder.AddDate = DateTime.Now;
             workOrder.IsActive = true;
             workOrder.IsCompleted = false;
@@ -80,6 +84,7 @@ namespace WorkHub.Controllers
         // GET: WorkOrders/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.Categories = db.Categories.ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -101,6 +106,7 @@ namespace WorkHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,UserRefId,CategoryId,IsActive,IsCompleted,AddDate,Payment,Location,Description,PhoneNumber")] WorkOrder workOrder)
         {
+            ViewBag.Categories = db.Categories.ToList();
             if (ModelState.IsValid)
             {
                 db.Entry(workOrder).State = EntityState.Modified;
@@ -115,6 +121,7 @@ namespace WorkHub.Controllers
         // GET: WorkOrders/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            ViewBag.Categories = db.Categories.ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,6 +139,7 @@ namespace WorkHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            ViewBag.Categories = db.Categories.ToList();
             WorkOrder workOrder = await db.WorkOrders.FindAsync(id);
             db.WorkOrders.Remove(workOrder);
             await db.SaveChangesAsync();

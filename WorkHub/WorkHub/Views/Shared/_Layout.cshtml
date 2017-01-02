@@ -21,11 +21,11 @@
 <body>
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">Programming</a></li>
-        <li><a href="#!">Private lessons</a></li>
-        <li><a href="#!">Cleaning</a></li>
-        <li><a href="#!">Babysitting</a></li>
-        <li><a href="#!">Garden</a></li>
+    @foreach (var item in ViewBag.Categories)
+    {
+        <li><a href="#">@item.Type</a></li>
+    }
+        
     </ul>
     <!-- End-->
     <div class="container">
