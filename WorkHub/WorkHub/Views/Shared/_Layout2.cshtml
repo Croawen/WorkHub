@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     String Username = User.Identity.Name;
 }
 
@@ -10,22 +10,22 @@
     <title>WorkHub - Find easy part-time jobs online.</title>
     @Styles.Render("~/Content/Materialize/css")
     @Scripts.Render("~/bundles/materialize")
-    
+
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
         $(document).ready(function() {
             $(".dropdown-button").dropdown(); // Load dropdown categories menu script
-        });          
+        });
     </script>
 </head>
 <body>
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
-    @foreach (var item in ViewBag.Categories)
-    {
-        <li><a href="#">@item.Type</a></li>
-    }
-        
+        @foreach (var item in ViewBag.Categories)
+        {
+            <li><a href="#">@item.Type</a></li>
+        }
+
     </ul>
     <!-- End-->
     <div>

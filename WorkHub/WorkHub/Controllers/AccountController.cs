@@ -163,7 +163,8 @@ namespace WorkHub.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     ReputationPoints = 0,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    Layout = 1
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
