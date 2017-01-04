@@ -15,6 +15,9 @@
     <script>
         $(document).ready(function() {
             $(".dropdown-button").dropdown(); // Load dropdown categories menu script
+            window_size = $(window).height();
+            $('.sidenav').height(window_size);
+            $('.page-footer').css('margin-top', "0px");
         });
     </script>
 </head>
@@ -28,15 +31,15 @@
 
     </ul>
     <!-- End-->
-    <div>
-        <nav>
+        <nav class="black">
             <div class="nav-wrapper">
-                <a class="brand-logo center" href="~/Home/LoggedIndex">WorkHub</a>
-                <ul>
+                    <a class="brand-logo" href="~/Home/LoggedIndex">WorkHub</a>
+
+               <!-- <ul>
                     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
-                </ul>
+                </ul>-->
                 <ul class="right hide-on-med-and-down">
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -46,16 +49,25 @@
                 </ul>
             </div>
         </nav>
-        <div class="container">
-            @RenderBody() <!-- Render body from views-->
-        </div>
-        <footer class="page-footer">
-            <div class="footer-copyright">
-                <div class="container">
-                    &copy; @DateTime.Now.Year - Workhub
+        <div class="row">
+            <div class="col s2 grey darken-4 sidenav">
+                <ul>
+                    <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
+                    <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
+                    </ul>
+            </div>
+            <div class="col s10">
+                <div class="">
+                    @RenderBody() <!-- Render body from views-->
                 </div>
             </div>
-        </footer>
-    </div> <!-- /container -->
+        </div> <!--End row-->
+            <footer class="page-footer black">
+                <div class="footer-copyright">
+                    <div class="container">
+                        &copy; @DateTime.Now.Year - Workhub
+                    </div>
+                </div>
+            </footer>
 </body>
 </html>
