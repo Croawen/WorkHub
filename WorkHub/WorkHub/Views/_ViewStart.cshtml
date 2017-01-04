@@ -1,3 +1,18 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using WorkHub.Models;
+@using WorkHub.Controllers;
+@{
+    var user = ManageController.GetCurrentUser(User.Identity.Name);
+
+    if (user != null)
+    {
+        if (user.Layout == 1)
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else if(user.Layout == 2)
+        {
+            Layout = "~/Views/Shared/_Layout2.cshtml";
+        }
+        <script>alert(@user.Layout);</script>
+    }
 }

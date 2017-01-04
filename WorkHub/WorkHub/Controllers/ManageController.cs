@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WorkHub.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WorkHub.Controllers
 {
@@ -18,6 +19,13 @@ namespace WorkHub.Controllers
 
         public ManageController()
         {
+        }
+
+        public static ApplicationUser GetCurrentUser(string userName)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user = userManager.FindByName(userName);
+            return user;
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
