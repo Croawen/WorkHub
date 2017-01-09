@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -19,7 +20,7 @@ namespace WorkHub.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -154,10 +155,13 @@ namespace WorkHub.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool adminCheck = db.Users.Count() == 0;
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
+                    IsAdmin = adminCheck,
                     Address = model.Address,
                     City = model.City,
                     DateOfBirth = model.DateOfBirth.Date,
