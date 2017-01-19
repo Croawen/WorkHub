@@ -11,6 +11,9 @@
     {
         string collectionString = item.Description + " - " + item.Category.Type + ". Reward: " + item.Payment + "$";
         <a href="WorkOrders/Details/@item.Id" class="collection-item">@collectionString<i class="material-icons secondary-content">send</i></a>
-        
+        if (User.IsInRole("Admin"))
+        {
+            <a href="WorkOrders/Delete/@item.Id">DELETE</a>
+        }
     }
 </div>

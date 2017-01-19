@@ -173,7 +173,7 @@ namespace WorkHub.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    if (count == 0)
+                    if (count == 0) 
                     {
                         await UserManager.AddToRoleAsync(user.Id, "Admin");
                     }

@@ -122,24 +122,7 @@ namespace WorkHub.Controllers
         }
 
         // GET: WorkOrders/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            ViewBag.Categories = db.Categories.ToList();
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WorkOrder workOrder = await db.WorkOrders.FindAsync(id);
-            if (workOrder == null)
-            {
-                return HttpNotFound();
-            }
-            return View(workOrder);
-        }
-
-        // POST: WorkOrders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             ViewBag.Categories = db.Categories.ToList();
