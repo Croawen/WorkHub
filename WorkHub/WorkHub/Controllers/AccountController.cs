@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WorkHub.Models;
 using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WorkHub.Controllers
 {
@@ -26,7 +27,7 @@ namespace WorkHub.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager  )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -83,7 +84,7 @@ namespace WorkHub.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("LoggedIndex", "Home");
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -155,13 +156,11 @@ namespace WorkHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool adminCheck = db.Users.Count() == 0;
-
+                var count = db.Users.Count();
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    IsAdmin = adminCheck,
                     Address = model.Address,
                     City = model.City,
                     DateOfBirth = model.DateOfBirth.Date,
@@ -169,20 +168,21 @@ namespace WorkHub.Controllers
                     LastName = model.LastName,
                     ReputationPoints = 0,
                     PhoneNumber = model.PhoneNumber,
-                    Layout = 1
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    if (count == 0)
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    }
+                    else
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, "User");
+                    }
 
-                    return RedirectToAction("LoggedIndex", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

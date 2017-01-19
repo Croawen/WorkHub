@@ -21,7 +21,7 @@ namespace WorkHub.Controllers
         public async Task<ActionResult> Index()
         {
             ViewBag.Categories = db.Categories.ToList();
-            var workOrders = db.WorkOrders.Include(w => w.Category).Include(w => w.User);
+            var workOrders = db.WorkOrders.Where(x => x.IsActive).Include(w => w.Category).Include(w => w.User);
             return View(await workOrders.ToListAsync());
         }
 
@@ -34,6 +34,7 @@ namespace WorkHub.Controllers
             {
                 var workOrders = db.WorkOrders.Include(w => w.Category).Include(w => w.User);
                 WorkOrder workOrder = await workOrders.FirstOrDefaultAsync(x => x.Id == id);
+
                 if (workOrder == null)
                 {
                     return HttpNotFound();

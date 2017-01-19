@@ -31,7 +31,7 @@
     <div>
         <nav>
             <div class="nav-wrapper">
-                <a class="brand-logo center" href="~/Home/LoggedIndex">WorkHub</a>
+                <a class="brand-logo center" href="~/Home/Index">WorkHub</a>
                 <ul>
                     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
@@ -40,7 +40,7 @@
                 <ul class="right hide-on-med-and-down">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="#"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
+                        <li><a href="~/Manage/Index"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
                         <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
                     }
                 </ul>
