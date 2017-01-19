@@ -16,13 +16,11 @@ namespace WorkHub.Models
     {
         public DateTime DateOfBirth { get; set; }
         public int ReputationPoints { get; set; }
-        public bool IsAdmin { get; set; } // 0 - normal, 1 - admin
         public string Address { get; set; }
         public string City { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }
-        public int Layout { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

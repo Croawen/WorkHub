@@ -15,15 +15,14 @@ namespace WorkHub.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.Categories = db.Categories.ToList();
+                var workOrderList = db.WorkOrders.ToList();
+                return View("LoggedIndex", workOrderList);
+            }
 
-        [Authorize]
-        public ActionResult LoggedIndex()
-        {
-            ViewBag.Categories = db.Categories.ToList();
-            var workOrderList = db.WorkOrders.ToList();
-            return View(workOrderList);
+            return View();
         }
     }
 }
