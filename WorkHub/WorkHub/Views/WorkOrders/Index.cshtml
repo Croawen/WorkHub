@@ -13,7 +13,7 @@
         <a href="WorkOrders/Details/@item.Id" class="collection-item">@collectionString<i class="material-icons secondary-content">send</i></a>
         if (User.IsInRole("Admin"))
         {
-            <a href="WorkOrders/Delete/@item.Id">DELETE</a>
+            <a class="collection-item" href="WorkOrders/Delete/@item.Id">Delete Job<i class="material-icons secondary-content">delete</i></a>
         }
     }
 </div>
