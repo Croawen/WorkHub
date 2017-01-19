@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
@@ -9,16 +11,18 @@ namespace WorkHub
 {
     public partial class Startup
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
             CreateRolesandUsers();
+            Seed();
         }
 
         private void CreateRolesandUsers()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
             if (!roleManager.RoleExists("Admin"))
             {
@@ -31,6 +35,26 @@ namespace WorkHub
                 var role = new IdentityRole {Name = "User"};
                 roleManager.Create(role);
             }
+        }
+
+        private void Seed()
+        {
+            var categories = new List<Category>
+            {
+                new Category { Type = "Gardening" },
+                new Category { Type = "Cooking" },
+                new Category { Type = "Repair" },
+                new Category { Type = "Coding" },
+                new Category { Type = "Cleaning" },
+                new Category { Type = "Teaching" }
+            };
+
+            foreach (var w in categories)
+            {
+                db.Categories.AddOrUpdate(w);
+            }
+
+            db.SaveChanges();
         }
     }
 }
