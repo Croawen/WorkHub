@@ -6,7 +6,7 @@
 <html>
 <head>
     <style>
-        header, main, footer {
+        nav, header, main, footer {
       padding-left: 300px;
     }
     </style>
@@ -26,7 +26,6 @@
 <body>
         <nav class="black">
             <div class="nav-wrapper">
-                    <a class="brand-logo" href="~/Home/LoggedIndex">WorkHub</a>
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                <!-- <ul>
                     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
@@ -69,7 +68,7 @@
     <li><a class="subheader">Categories</a></li>
     @foreach (var item in ViewBag.Categories)
     {
-        <li><a href="#" class="white-text">@item.Type</a></li>
+        <li><a href="/WorkOrders/Category/@item.CategoryId" class="white-text">@item.Type</a></li>
     }
 
 </ul>

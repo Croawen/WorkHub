@@ -57,6 +57,14 @@ namespace WorkHub.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult Category(int id)
+        {
+            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.WorkOrders = db.WorkOrders.Where(x => x.Category.CategoryId == id).ToList();
+            return View();
+        }
+
         // POST: WorkOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
