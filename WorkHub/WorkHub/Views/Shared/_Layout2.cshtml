@@ -5,6 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        header, main, footer {
+      padding-left: 300px;
+    }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkHub - Find easy part-time jobs online.</title>
@@ -14,27 +19,15 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
         $(document).ready(function() {
-            $(".dropdown-button").dropdown(); // Load dropdown categories menu script
-            window_size = $(window).height();
-            $('.sidenav').height(window_size);
-            $('.page-footer').css('margin-top', "0px");
+            $(".button-collapse").sideNav();
         });
     </script>
 </head>
 <body>
-    <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-        @foreach (var item in ViewBag.Categories)
-        {
-            <li><a href="#">@item.Type</a></li>
-        }
-
-    </ul>
-    <!-- End-->
         <nav class="black">
             <div class="nav-wrapper">
                     <a class="brand-logo" href="~/Home/LoggedIndex">WorkHub</a>
-
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                <!-- <ul>
                     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
                     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
@@ -50,13 +43,7 @@
             </div>
         </nav>
         <div class="row">
-            <div class="col s2 grey darken-4 sidenav">
-                <ul>
-                    <li>@Html.ActionLink("All jobs", "Index", "WorkOrders")</li>
-                    <li>@Html.ActionLink("Post a job", "Create", "WorkOrders")</li>
-                    </ul>
-            </div>
-            <div class="col s10">
+            <div style="padding-left: 330px;">
                 <div class="">
                     @RenderBody() <!-- Render body from views-->
                 </div>
@@ -71,3 +58,18 @@
             </footer>
 </body>
 </html>
+
+
+<ul id="slide-out" class="side-nav fixed grey darken-3">
+    <li><a href="~/Home/LoggedIndex" class="white-text name"><i class="material-icons white-text">work</i>WorkHub</a></li>
+    <li><div class="divider grey darken-1"></div></li>
+    <li>@Html.ActionLink("All jobs", "Index", "WorkOrders", null, new { @class = "white-text" })</li>
+    <li>@Html.ActionLink("Post a job", "Create", "WorkOrders", null, new { @class = "white-text" })</li>
+    <li><div class="divider grey darken-1"></div></li>
+    <li><a class="subheader">Categories</a></li>
+    @foreach (var item in ViewBag.Categories)
+    {
+        <li><a href="#" class="white-text">@item.Type</a></li>
+    }
+
+</ul>
