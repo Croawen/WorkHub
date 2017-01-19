@@ -7,13 +7,25 @@
 <center><h2>All work orders</h2></center>
 
 <div class="collection">
-    @foreach (var item in Model)
+    @if (User.IsInRole("Admin"))
     {
-        string collectionString = item.Description + " - " + item.Category.Type + ". Reward: " + item.Payment + "$";
-        <a href="WorkOrders/Details/@item.Id" class="collection-item">@collectionString<i class="material-icons secondary-content">send</i></a>
-        if (User.IsInRole("Admin"))
-        {
-            <a class="collection-item" href="WorkOrders/Delete/@item.Id">Delete Job<i class="material-icons secondary-content">delete</i></a>
-        }
+        <table>
+            @foreach (var item in Model)
+            {
+                string collectionString = item.Description + " - " + item.Category.Type + ". Reward: " + item.Payment + "$";
+                <tr>
+                    <td><a href="WorkOrders/Details/@item.Id" class="collection-item">@collectionString<i class="material-icons secondary-content">send</i></a></td>
+                    <td><a class="collection-item" href="WorkOrders/Delete/@item.Id">Delete Job<i class="material-icons secondary-content">delete</i></a></td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        foreach (var item in Model)
+         {
+             string collectionString = item.Description + " - " + item.Category.Type + ". Reward: " + item.Payment + "$";
+             <a href="WorkOrders/Details/@item.Id" class="collection-item">@collectionString<i class="material-icons secondary-content">send</i></a>
+         }
     }
 </div>
