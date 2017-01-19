@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -39,14 +40,15 @@ namespace WorkHub
 
         private void Seed()
         {
+            if (db.Categories.Any()) return;
             var categories = new List<Category>
             {
-                new Category { Type = "Gardening" },
-                new Category { Type = "Cooking" },
-                new Category { Type = "Repair" },
-                new Category { Type = "Coding" },
-                new Category { Type = "Cleaning" },
-                new Category { Type = "Teaching" }
+                new Category {Type = "Gardening"},
+                new Category {Type = "Cooking"},
+                new Category {Type = "Repair"},
+                new Category {Type = "Coding"},
+                new Category {Type = "Cleaning"},
+                new Category {Type = "Teaching"}
             };
 
             foreach (var w in categories)
