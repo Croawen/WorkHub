@@ -35,7 +35,7 @@
                 <ul class="right hide-on-med-and-down">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="#"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
+                        <li><a href="~/Manage/Index"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
                         <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
                     }
                 </ul>
@@ -60,7 +60,7 @@
 
 
 <ul id="slide-out" class="side-nav fixed grey darken-3">
-    <li><a href="~/Home/LoggedIndex" class="white-text name"><i class="material-icons white-text">work</i>WorkHub</a></li>
+    <li><a href="~/Home/Index" class="white-text name"><i class="material-icons white-text">work</i>WorkHub</a></li>
     <li><div class="divider grey darken-1"></div></li>
     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders", null, new { @class = "white-text" })</li>
     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders", null, new { @class = "white-text" })</li>
