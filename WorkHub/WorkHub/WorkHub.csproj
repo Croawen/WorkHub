@@ -229,6 +229,7 @@
   <ItemGroup>
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\bg.mp4" />
+    <Content Include="Content\Images\person.png" />
     <Content Include="Content\Images\work.png" />
     <Content Include="Content\Index\index-style.css" />
     <Content Include="Content\Materialize\materialize.css" />

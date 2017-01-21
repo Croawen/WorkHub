@@ -96,6 +96,13 @@ namespace WorkHub.Controllers
             return View();
         }
 
+
+        public ActionResult ChangeLayout(int? id)
+        {
+            ViewBag.Categories = db.Categories.ToList();
+            return View();
+        }
+
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
