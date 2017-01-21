@@ -1,11 +1,11 @@
 ﻿@model WorkHub.Models.IndexViewModel
+
 <div>
     <div class="row">
         <div class="col s6">
             <div class="card white darken-1">
                 <div class="card-content dark-text">
                     <span class="card-title">Account settings</span>
-                    <p>Change your Password:</p>
                 </div>
                 <div class="card-action">
                     @Html.ActionLink("Change your password", "ChangePassword")
@@ -17,12 +17,20 @@
             <div class="card white darken-1">
                 <div class="card-content dark-text">
                     <span class="card-title">Your jobs</span>
-                    <div class="collection">
-                        @foreach (var job in ViewBag.UserJobs)
-                        {
-                            <a href="~/WorkOrders/Details/@job.Id" class="collection-item">@job.Description</a>
-                        }
-                    </div>
+                    @if(ViewBag.UserJobs.Count == 0)
+                    {
+                        <p>You didn't post any jobs!</p>
+                        <center><a class="waves-effect waves-light btn-large" href="~/WorkOrders/Create">Post a job</a></center>
+                    }
+                    else
+                    {
+                        <div class="collection">
+                            @foreach (var job in ViewBag.UserJobs)
+                            {
+                                <a href="~/WorkOrders/Details/@job.Id" class="collection-item">@job.Description</a>
+                            }
+                        </div>
+                    }           
             </div>
         </div>
     </div>
