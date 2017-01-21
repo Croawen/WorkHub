@@ -1,27 +1,30 @@
 ﻿@model WorkHub.Models.IndexViewModel
-@{
-    ViewBag.Title = "Manage";
-}
-
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col s6">
+            <div class="card white darken-1">
+                <div class="card-content dark-text">
+                    <span class="card-title">Account settings</span>
+                    <p>Change your Password:</p>
+                </div>
+                <div class="card-action">
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                </div>
+            </div>
+        </div>
+
+        <div class="col s6">
+            <div class="card white darken-1">
+                <div class="card-content dark-text">
+                    <span class="card-title">Your jobs</span>
+                    <div class="collection">
+                        @foreach (var job in ViewBag.UserJobs)
+                        {
+                            <a href="~/WorkOrders/Details/@job.Id" class="collection-item">@job.Description</a>
+                        }
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

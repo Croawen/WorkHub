@@ -64,6 +64,10 @@ namespace WorkHub.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.Categories = db.Categories.ToList();
+            var id = User.Identity.GetUserId();
+
+            ViewBag.UserJobs = db.WorkOrders.Where(x => x.UserRefId == id).ToList();
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

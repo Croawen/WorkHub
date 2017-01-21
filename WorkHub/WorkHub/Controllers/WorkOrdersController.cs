@@ -29,6 +29,7 @@ namespace WorkHub.Controllers
         [Authorize]
         public async Task<ActionResult> Details(int id)
         {
+            ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.Categories = db.Categories.ToList();
             try
             {
@@ -78,8 +79,6 @@ namespace WorkHub.Controllers
             workOrder.IsCompleted = false;
             workOrder.UserRefId = User.Identity.GetUserId();
 
-       
-
             if (ModelState.IsValid)
             {
                 db.WorkOrders.Add(workOrder);
@@ -115,9 +114,13 @@ namespace WorkHub.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserRefId,CategoryId,IsActive,IsCompleted,AddDate,Payment,Location,Description,PhoneNumber")] WorkOrder workOrder)
+        public async Task<ActionResult> Edit(WorkOrder workOrder)
         {
             ViewBag.Categories = db.Categories.ToList();
+            workOrder.AddDate = DateTime.Now;
+            workOrder.IsActive = true;
+            workOrder.IsCompleted = false;
+            workOrder.UserRefId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
                 db.Entry(workOrder).State = EntityState.Modified;

@@ -1,110 +1,101 @@
 ﻿@model WorkHub.Models.WorkOrder
 
-@{
-    ViewBag.Title = "Edit";
-}
+<script>
+    $(document).ready(function () {
+        $("select").material_select(); // Load dropdown categories menu script
+    });
+</script>
+<script async defer type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoDnASCk5XqED-0ii5mnpRvhCo_7YFtWo&callback=initMap"></script>
+<script>
 
-<h2>Edit</h2>
+    function initMap() {
+        var poslng = document.getElementById('Longitude');
+        var poslat = document.getElementById('Latitude');
+
+        poslng.value = @Model.Longitude;
+        poslat.value = @Model.Latitude;
+
+        var userPosition = { lat: @Model.Latitude, lng: @Model.Longitude };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: userPosition
+        });
+        var marker = new google.maps.Marker({
+            position: userPosition,
+            icon: '/Content/Images/work.png',
+          map: map
+
+        });
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>WorkOrder</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        map.addListener('click', function (e) {
+            marker.setPosition(e.latLng);
+            console.log(e.latLng.lat);
+            poslng.value = marker.getPosition().lng();
+            poslat.value = marker.getPosition().lat();
+        });
+    }
+</script>
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card white darken-1">
+            <div class="card-content dark-text">
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserRefId, "UserRefId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserRefId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserRefId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "" })
+                        @Html.LabelFor(model => model.CategoryId, "Category")
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.LabelFor(model => model.Payment)
+                        @Html.EditorFor(model => model.Payment)
+                        @Html.ValidationMessageFor(model => model.Payment, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsCompleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsCompleted)
-                    @Html.ValidationMessageFor(model => model.IsCompleted, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.LabelFor(model => model.Description)
+                        @Html.EditorFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AddDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AddDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AddDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.LabelFor(model => model.PhoneNumber)
+                        @Html.EditorFor(model => model.PhoneNumber)
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Payment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Payment, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.HiddenFor(model => model.Latitude)
+                        @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="input-field">
+                        @Html.HiddenFor(model => model.Longitude)
+                        @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="input-field">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="col s12 m6">
+        <div class="card white darken-1">
+            <div class="card-content dark-text">
+                <span class="card-title">Select a place for your job.</span>
+                <div id="map" style="width: 100%; height: 480px;"></div>
+            </div>
+        </div>
+    </div>
+</div><!--End row-->

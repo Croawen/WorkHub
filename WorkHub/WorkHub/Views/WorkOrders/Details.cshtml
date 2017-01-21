@@ -10,8 +10,15 @@
                 </p>
             </div>
             <div class="card-action">
-                <a href="#">Take this job</a>
-                <a href="#">Find others</a>
+                @if (ViewBag.UserId == Model.UserRefId)
+                {
+                    <a href="~/WorkOrders/Edit/@Model.Id">Edit Job</a>
+                }
+                else
+                {
+                    <a href="#">Take this job</a>
+                    <a href="~/WorkOrders">Find others</a>
+                } 
             </div>
         </div>
     </div>
