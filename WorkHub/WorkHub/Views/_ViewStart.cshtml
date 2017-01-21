@@ -1,5 +1,7 @@
 ﻿@using WorkHub.Models;
 @using WorkHub.Controllers;
 @{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    var lol = ManageController.GetCurrentLayout();
+    var layoutString = "~/Views/Shared/_Layout" + lol + ".cshtml";
+    Layout = layoutString;
 }

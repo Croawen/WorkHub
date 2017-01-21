@@ -40,22 +40,28 @@ namespace WorkHub
 
         private void Seed()
         {
-            if (db.Categories.Any()) return;
-            var categories = new List<Category>
+            if (!db.Categories.Any())
             {
-                new Category {Type = "Gardening"},
-                new Category {Type = "Cooking"},
-                new Category {Type = "Repair"},
-                new Category {Type = "Coding"},
-                new Category {Type = "Cleaning"},
-                new Category {Type = "Teaching"}
-            };
+                var categories = new List<Category>
+                {
+                    new Category {Type = "Gardening"},
+                    new Category {Type = "Cooking"},
+                    new Category {Type = "Repair"},
+                    new Category {Type = "Coding"},
+                    new Category {Type = "Cleaning"},
+                    new Category {Type = "Teaching"}
+                };
 
-            foreach (var w in categories)
-            {
-                db.Categories.AddOrUpdate(w);
+                foreach(var category in categories)
+                {
+                    db.Categories.AddOrUpdate(category);
+                }
             }
-
+           if(!db.Settings.Any())
+            {
+                var setting = new Settings { LayoutType = 1 };
+                db.Settings.AddOrUpdate(setting);
+            }
             db.SaveChanges();
         }
     }

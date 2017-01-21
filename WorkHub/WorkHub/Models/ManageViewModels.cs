@@ -12,6 +12,7 @@ namespace WorkHub.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public Settings Setting { get; set;}
     }
 
     public class ManageLoginsViewModel

@@ -3,6 +3,10 @@
     function SubmitForm() {
         document.getElementById("layoutform").submit();
     }
+
+    $(document).ready(function () {
+        $("select").material_select(); // Load dropdown categories menu script
+    });
 </script>
 <div>
     <div class="row">
@@ -49,16 +53,12 @@
                         <span class="card-title">Admin Panel</span>
                         <p>Select page layout:</p>
                         <br/>
-                        <form action="/Manage/ChangeLayout" id="layoutform">
-                            <p>
-                                <input name="group1" type="radio" id="layout1" />
-                                <label for="layout1">Light layout</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="layout2" />
-                                <label for="layout2">Dark layout</label>
-                            </p>
-
+                        <form action="/Manage/ChangeLayout" name="layoutform" id="layoutform" method="post" runar="server">
+                            <select id="layoutoptions" name="layoutoptions">
+                                <option value="" disabled selected>Choose layout</option>
+                                <option id="light" name="light" value="1">Light layout</option>
+                                <option id="dark" name="dark" value="2">Dark layout</option>
+                            </select>
                         </form>
                     </div>
                     <div class="card-action">

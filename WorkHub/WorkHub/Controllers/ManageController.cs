@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WorkHub.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace WorkHub.Controllers
 {
@@ -27,6 +28,11 @@ namespace WorkHub.Controllers
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var user = userManager.FindByName(userName);
             return user;
+        }
+
+        public static int GetCurrentLayout()
+        {
+            return new ApplicationDbContext().Settings.FirstOrDefault().LayoutType;
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -83,7 +89,8 @@ namespace WorkHub.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Setting = db.Settings.FirstOrDefault(x => x.Id == 1)             
             };
             return View(model);
         }
@@ -96,11 +103,19 @@ namespace WorkHub.Controllers
             return View();
         }
 
-
-        public ActionResult ChangeLayout(int? id)
+        [HttpPost]
+        public ActionResult ChangeLayout(FormCollection Form)
         {
+            var select = Request["layoutoptions"];
+            if(select != null)
+            {
+                var Setting = db.Settings.FirstOrDefault();
+                Setting.LayoutType = Int32.Parse(select);
+                db.Entry(Setting).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             ViewBag.Categories = db.Categories.ToList();
-            return View();
+            return RedirectToAction("Index");
         }
 
         //
