@@ -5,6 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        body {
+            background-color: #e9ebee;
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkHub - Find easy part-time jobs online.</title>
@@ -29,7 +34,7 @@
     </ul>
     <!-- End-->
     <div>
-        <nav>
+        <nav class="blue lighten-1">
             <div class="nav-wrapper">
                 <a class="brand-logo center" href="~/Home/Index">WorkHub</a>
                 <ul>
@@ -49,7 +54,7 @@
         <div class="container">
             @RenderBody() <!-- Render body from views-->
         </div>
-        <footer class="page-footer">
+        <footer class="page-footer blue lighten-1">
             <div class="footer-copyright">
                 <div class="container">
                     &copy; @DateTime.Now.Year - Workhub

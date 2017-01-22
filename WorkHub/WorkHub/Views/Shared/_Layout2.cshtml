@@ -7,8 +7,12 @@
 <head>
     <style>
         nav, header, main, footer {
-      padding-left: 300px;
-    }
+            padding-left: 300px;
+        }
+      body {
+               background-color: #bdbdbd;
+           }
+
     </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,13 +63,12 @@
 </html>
 
 
-<ul id="slide-out" class="side-nav fixed grey darken-3">
+<ul id="slide-out" class="side-nav fixed black">
     <li><a href="~/Home/Index" class="white-text name"><i class="material-icons white-text">work</i>WorkHub</a></li>
-    <li><div class="divider grey darken-1"></div></li>
     <li>@Html.ActionLink("All jobs", "Index", "WorkOrders", null, new { @class = "white-text" })</li>
     <li>@Html.ActionLink("Post a job", "Create", "WorkOrders", null, new { @class = "white-text" })</li>
     <li><div class="divider grey darken-1"></div></li>
-    <li><a class="subheader">Categories</a></li>
+    <li><a class="subheader grey-text text-darken-1">Categories</a></li>
     @foreach (var item in ViewBag.Categories)
     {
         <li><a href="/WorkOrders/Category/@item.CategoryId" class="white-text">@item.Type</a></li>
