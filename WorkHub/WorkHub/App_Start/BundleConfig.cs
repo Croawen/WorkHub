@@ -14,8 +14,6 @@ namespace WorkHub
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
@@ -25,7 +23,6 @@ namespace WorkHub
 
             /* Materialize Framework JS */
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
-                     "~/Scripts/Materialize/materialize.js",
                      "~/Scripts/Materialize/materialize.min.js",
                      "~/Scripts/jquery-{version}.js",
                       "~/Scripts/jquery.validate*"
@@ -43,7 +40,6 @@ namespace WorkHub
 
             /* Materialize Framework Stylesheets */
             bundles.Add(new StyleBundle("~/Content/Materialize/css").Include(
-             "~/Content/Materialize/materialize.css",
              "~/Content/Materialize/materialize.min.css"));
         }
     }
