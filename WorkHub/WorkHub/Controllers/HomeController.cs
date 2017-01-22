@@ -11,17 +11,21 @@ namespace WorkHub.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        // GET /Home/Index
+        [HttpGet]
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            // If user has successfuly logged in, return view for logged users.
+            if (User.Identity.IsAuthenticated) 
             {
-                ViewBag.Categories = db.Categories.ToList();
-                var workOrderList = db.WorkOrders.ToList();
+                ViewBag.Categories = _db.Categories.ToList();
+                var workOrderList = _db.WorkOrders.ToList();
                 return View("LoggedIndex", workOrderList);
             }
 
+            // Else return landing page.
             return View();
         }
     }

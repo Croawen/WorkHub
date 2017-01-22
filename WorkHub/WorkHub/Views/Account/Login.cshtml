@@ -6,7 +6,7 @@
 }
 
 <div class="form-box">
-    <center><h1>Log In</h1></center>
+    <div style="text-align: center;" ><h1>Log In</h1></div>
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-form", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -29,15 +29,11 @@
                         </div>
                     </div>
                 <div class="form-group">
-                    <center><input type="submit" value="Log in" class="form-button" /></center>
-                    </div>
+                    <div style="text-align: center;" ><input type="submit" value="Log in" class="form-button" /></div>
+                </div>
                 <p>
-                    <center>@Html.ActionLink("Register as a new user", "Register")</center>
+                    <div style="text-align: center;" >@Html.ActionLink("Register as a new user", "Register")</div>
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
     }
 </div>
 @Styles.Render("~/Content/Register/css")

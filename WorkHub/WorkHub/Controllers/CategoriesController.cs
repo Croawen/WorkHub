@@ -15,19 +15,21 @@ namespace WorkHub.Controllers
 {
     public class CategoriesController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: api/Categories
+        [HttpGet]
         public IQueryable<Category> GetCategories()
         {
-            return db.Categories;
+            return _db.Categories;
         }
 
         // GET: api/Categories/5
+        [HttpGet]
         [ResponseType(typeof(Category))]
         public async Task<IHttpActionResult> GetCategory(int id)
         {
-            Category category = await db.Categories.FindAsync(id);
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -36,42 +38,8 @@ namespace WorkHub.Controllers
             return Ok(category);
         }
 
-        // PUT: api/Categories/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCategory(int id, Category category)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != category.CategoryId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/Categories
+        [HttpPost]
         [ResponseType(typeof(Category))]
         public async Task<IHttpActionResult> PostCategory(Category category)
         {
@@ -80,24 +48,25 @@ namespace WorkHub.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Categories.Add(category);
-            await db.SaveChangesAsync();
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
         }
 
         // DELETE: api/Categories/5
+        [HttpDelete]
         [ResponseType(typeof(Category))]
         public async Task<IHttpActionResult> DeleteCategory(int id)
         {
-            Category category = await db.Categories.FindAsync(id);
+            Category category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(category);
-            await db.SaveChangesAsync();
+            _db.Categories.Remove(category);
+            await _db.SaveChangesAsync();
 
             return Ok(category);
         }
@@ -106,14 +75,14 @@ namespace WorkHub.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool CategoryExists(int id)
         {
-            return db.Categories.Count(e => e.CategoryId == id) > 0;
+            return _db.Categories.Count(e => e.CategoryId == id) > 0;
         }
     }
 }

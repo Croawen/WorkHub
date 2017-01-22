@@ -1,5 +1,5 @@
 ﻿@{
-    String Username = User.Identity.Name;
+    String username = User.Identity.Name;
 }
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
                 <ul class="right hide-on-med-and-down">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="~/Manage/Index"><i class="material-icons left">perm_identity</i> Welcome, <b>@Username</b>!</a></li>
+                        <li><a href="~/Manage/Index"><i class="material-icons left">perm_identity</i> Welcome, <b>@username</b>!</a></li>
                         <li>@Ajax.ActionLink("Log Out", "LogOut", "Account", new AjaxOptions { HttpMethod = "Post" })</li>
                     }
                 </ul>

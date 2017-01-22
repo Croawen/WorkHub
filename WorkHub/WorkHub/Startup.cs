@@ -57,11 +57,13 @@ namespace WorkHub
                     db.Categories.AddOrUpdate(category);
                 }
             }
+
            if(!db.Settings.Any())
             {
                 var setting = new Settings { LayoutType = 1 };
                 db.Settings.AddOrUpdate(setting);
             }
+
             db.SaveChanges();
         }
     }

@@ -15,7 +15,7 @@ namespace WorkHub.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -25,6 +25,7 @@ namespace WorkHub.Controllers
 
         public static ApplicationUser GetCurrentUser(string userName)
         {
+            // We can't use _db field because we are in a static context.
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var user = userManager.FindByName(userName);
             return user;
@@ -32,6 +33,7 @@ namespace WorkHub.Controllers
 
         public static int GetCurrentLayout()
         {
+            // NullReferenceException is possible if we drop all data from Settings table but we assume that noone will tinker with it.
             return new ApplicationDbContext().Settings.FirstOrDefault().LayoutType;
         }
 
@@ -65,19 +67,18 @@ namespace WorkHub.Controllers
             }
         }
 
-        //
         // GET: /Manage/Index
+        [HttpGet]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Categories = _db.Categories.ToList();
             var id = User.Identity.GetUserId();
 
-            ViewBag.UserJobs = db.WorkOrders.Where(x => x.UserRefId == id).ToList();
+            ViewBag.UserJobs = _db.WorkOrders.Where(x => x.UserRefId == id).ToList();
 
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
@@ -87,38 +88,39 @@ namespace WorkHub.Controllers
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Setting = db.Settings.FirstOrDefault(x => x.Id == 1)             
+                Setting = _db.Settings.FirstOrDefault(x => x.Id == 1)             
             };
             return View(model);
         }
 
-        //
         // GET: /Manage/ChangePassword
+        [HttpGet]
         public ActionResult ChangePassword()
         {
-            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Categories = _db.Categories.ToList();
             return View();
         }
 
+        // POST: /Manage/ChangeLayout
         [HttpPost]
         public ActionResult ChangeLayout(FormCollection Form)
         {
             var select = Request["layoutoptions"];
             if(select != null)
             {
-                var Setting = db.Settings.FirstOrDefault();
-                Setting.LayoutType = Int32.Parse(select);
-                db.Entry(Setting).State = EntityState.Modified;
-                db.SaveChanges();
+                var setting = _db.Settings.FirstOrDefault();
+                if (setting != null)
+                {
+                    setting.LayoutType = int.Parse(select);
+                    _db.Entry(setting).State = EntityState.Modified;
+                }
+                _db.SaveChanges();
             }
-            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Categories = _db.Categories.ToList();
             return RedirectToAction("Index");
         }
 
-        //
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -142,37 +144,12 @@ namespace WorkHub.Controllers
             return View(model);
         }
 
-        //
         // GET: /Manage/SetPassword
+        [HttpGet]
         public ActionResult SetPassword()
         {
-            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Categories = _db.Categories.ToList();
             return View();
-        }
-
-        //
-        // POST: /Manage/SetPassword
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-                if (result.Succeeded)
-                {
-                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                    if (user != null)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         protected override void Dispose(bool disposing)
@@ -187,16 +164,7 @@ namespace WorkHub.Controllers
         }
 
 #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
@@ -212,16 +180,6 @@ namespace WorkHub.Controllers
             if (user != null)
             {
                 return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
             }
             return false;
         }

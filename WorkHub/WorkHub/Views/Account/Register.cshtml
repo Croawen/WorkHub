@@ -8,8 +8,8 @@
 
 <br />
 <div class="form-box">
-    <center><h1>Sign up</h1></center>
-    
+    <div style="text-align: center;" ><h1>Sign up</h1></div>
+
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "reg-form", role = "form" }))
     {
        
@@ -54,10 +54,10 @@
             @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            <center><input type="submit" class="form-button" value="Register" /></center>
+            <div style="text-align: center;" ><input type="submit" class="form-button" value="Register" /></div>
         </div>
     }
-    <center>@Html.ActionLink("Already have an account? Login here.", "Login")</center>
+    <div style="text-align: center;" >@Html.ActionLink("Already have an account? Login here.", "Login")</div>
 </div>
 
 @{
@@ -74,4 +74,18 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

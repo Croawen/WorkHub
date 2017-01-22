@@ -8,6 +8,7 @@ namespace WorkHub.Models
 {
     public class Category
     {
+        // Primary Key
         [Key]
         public int CategoryId { get; set; }
 

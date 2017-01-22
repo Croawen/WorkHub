@@ -9,13 +9,16 @@ namespace WorkHub.Models
 {
     public class WorkOrder
     {
+        // Primary key
         [Key]
         public int Id { get; set; }
 
+        // UserRefId is a foreign key for ApplicationUser object
         public string UserRefId { get; set; }
         [ForeignKey("UserRefId")]
         public ApplicationUser User { get; set; }
         
+        // CategoryId is a foreign key for Category object
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
@@ -28,6 +31,7 @@ namespace WorkHub.Models
 
         public double Payment { get; set; }
 
+        // Latitude and Longitude for Google Maps
         public string Latitude { get; set; }
         public string Longitude { get; set; }
 
