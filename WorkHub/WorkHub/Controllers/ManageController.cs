@@ -121,6 +121,22 @@ namespace WorkHub.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: /Manage/ChangeLayout
+        [HttpPost]
+        public ActionResult AddCategory(FormCollection Form)
+        {
+            var newCategoryName = Request["newcategory"];
+            if (newCategoryName != "")
+            {
+                var newCategory = new Category();
+                newCategory.Type = newCategoryName;
+                _db.Categories.Add(newCategory);
+                _db.SaveChanges();
+            }
+            ViewBag.Categories = _db.Categories.ToList();
+            return RedirectToAction("Index");
+        }
+
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]

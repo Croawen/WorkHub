@@ -4,6 +4,10 @@
         document.getElementById("layoutform").submit();
     }
 
+    function SubmitFormCategory() {
+        document.getElementById("categoryform").submit();
+    }
+
     $(document).ready(function () {
         $("select").material_select(); // Load dropdown categories menu script
     });
@@ -63,6 +67,22 @@
                     </div>
                     <div class="card-action">
                         <a href="#" onclick="SubmitForm()">Submit Changes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s6">
+                <div class="card white darken-1">
+                    <div class="card-content dark-text">
+                        <span class="card-title">Add Category</span>
+                        <p>Add New Category:</p>
+                        <br />
+                        <form action="/Manage/AddCategory" name="categoryform" id="categoryform" method="post">
+                           <input id="newcategory" name="newcategory" type="text" placeholder="Write here"/>  
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" onclick="SubmitFormCategory()">Add Category</a>
                     </div>
                 </div>
             </div>

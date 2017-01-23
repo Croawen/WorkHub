@@ -29,8 +29,8 @@
                 <p>
                     <ul class="collection">
                         <li class="collection-item"><i class="material-icons secondary-content">contact_phone</i> Phone number: @Model.PhoneNumber</li>
-                        <li class="collection-item"><i class="material-icons secondary-content">label_outline</i>Category: @Model.Category.Type</li>
-                        <li class="collection-item">Completed: @if (Model.IsCompleted == true)
+                        <li class="collection-item red-text"><i class="material-icons secondary-content">label_outline</i>Category: @Model.Category.Type</li>
+                        <li class="collection-item"><i>Completed: @if (Model.IsCompleted == true)
                         { 
                             <i class="material-icons secondary-content">thumb_up</i>
                             <text>Yes</text>
@@ -40,8 +40,8 @@
                             <i class="material-icons secondary-content">thumb_down</i>
                             <text>No</text>
                         }
-                        </li>
-                        <li class="collection-item">Available: @if (Model.IsActive == true)
+                        </i></li>
+                        <li class="collection-item"><b>Available: @if (Model.IsActive == true)
                         {
                             <i class="material-icons secondary-content">done</i>
                             <text>Yes</text>
@@ -50,7 +50,8 @@
                         {
                             <i class="material-icons secondary-content">not_interested</i>
                             <text>No</text>
-                        }</li>
+                        }
+                            </b></li>
                         <li class="collection-item"><i class="material-icons secondary-content">payment</i>Payment: @Model.Payment $</li>
                     </ul>
                 </p>
